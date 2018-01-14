@@ -1,4 +1,7 @@
-package com.mmall.common;
+package com.mmall.common.json;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author GongDiXin
@@ -7,18 +10,19 @@ package com.mmall.common;
  * @description JSON请求结果类
  */
 public class JsonData {
-    private boolean result;
+
+    private boolean ret;
 
     private String msg;
 
     private Object data;
 
-    public boolean isResult() {
-        return result;
+    public boolean isRet() {
+        return ret;
     }
 
-    public void setResult(boolean result) {
-        this.result = result;
+    public void setRet(boolean ret) {
+        this.ret = ret;
     }
 
     public String getMsg() {
@@ -44,7 +48,7 @@ public class JsonData {
      * @param result 请求结果
     */
     public JsonData(boolean result){
-        this.result = result;
+        this.ret = result;
     }
 
     /**
@@ -66,12 +70,12 @@ public class JsonData {
      * @author GongDiXin
      * @date 2018/1/11 22:38
      * @description
-     * @param msg 返回结果信息
+     * @param object 请求结果
      * @return jsonData
      */
-    public static JsonData success(String msg){
+    public static JsonData success(Object object){
         JsonData jsonData = new JsonData(true);
-        jsonData.msg = msg;
+        jsonData.data = object;
         return jsonData;
     }
 
@@ -97,5 +101,13 @@ public class JsonData {
         JsonData jsonData = new JsonData(false);
         jsonData.msg = msg;
         return jsonData;
+    }
+
+    public Map<String,Object> toMap(){
+        Map<String,Object> result = new HashMap<>();
+        result.put("result",ret);
+        result.put("msg",msg);
+        result.put("data",data);
+        return  result;
     }
 }

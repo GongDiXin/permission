@@ -22,6 +22,9 @@
     <context:component-scan base-package="com.mmall.controller" />
     <context:component-scan base-package="com.mmall.service" />
 
+    <!-- Spring管理全局异常处理类 -->
+    <bean class="com.mmall.common.resolver.SpringExceptionResolver"/>
+
     <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />-->
 
     <!-- 指定以哪种形式返回 json数据还是jsp页面 -->
