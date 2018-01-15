@@ -1,9 +1,13 @@
 package com.mmall.controller;
 
+import com.mmall.common.context.ApplicationContextHelper;
 import com.mmall.common.exception.ParamException;
 import com.mmall.common.json.JsonData;
+import com.mmall.dao.SysAclModuleMapper;
+import com.mmall.model.SysAclModule;
 import com.mmall.param.TestVo;
 import com.mmall.util.BeanValidator;
+import com.mmall.util.JsonMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -37,6 +41,9 @@ public class TestController {
     @ResponseBody
     public JsonData validate(TestVo vo) throws ParamException{
         logger.info("validate");
+        SysAclModuleMapper moduleMapper = ApplicationContextHelper.popBean(SysAclModuleMapper.class);
+        SysAclModule sysAclModule = moduleMapper.selectByPrimaryKey(1);
+        logger.info(JsonMapper.obj2String(sysAclModule));
         BeanValidator.validate(vo);
         return JsonData.success("test validate");
     }

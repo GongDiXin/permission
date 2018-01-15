@@ -20,7 +20,6 @@ public class TestVo {
     @NotNull
     private String id;
 
-    @NotEmpty
     private List<String> str;
 
     public String getMsg() {

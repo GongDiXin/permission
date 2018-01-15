@@ -79,20 +79,13 @@ public class BeanValidator {
      */
     public static void validate(Object first,Object... objects){
         Map<String,String> map;
-        StringBuilder stringBuilder = new StringBuilder();
         if(objects != null && objects.length > 0){
             map  = validateList(Lists.asList(first,objects));
         }else {
             map  = validateObject(first,new Class[0]);
         }
         if(MapUtils.isNotEmpty(map)){
-            for(Map.Entry entry : map.entrySet()){
-                stringBuilder.append(entry.getKey());
-                stringBuilder.append("->");
-                stringBuilder.append(entry.getValue());
-                stringBuilder.append(PLACE_HOLDER);
-            }
-            throw new ParamException(stringBuilder.toString().trim());
+            throw new ParamException(map.toString());
         }
     }
 }
