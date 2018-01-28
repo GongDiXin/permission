@@ -18,11 +18,16 @@ public class ApplicationContextHelper implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext context) throws BeansException {
+        /**
+        *   重写该方法  在spring启动时会把spring的上下文注入到该方法中
+        *   再把注入的context赋给我们定义的全局变量applicationContext
+        *   @Component("applicationContextHelper") 主要还是通过这个把ApplicationContextHelper交给spring管理
+         */
         applicationContext = context;
     }
 
-    public static <T> T popBean(Class<T> clazz) {
-        if (applicationContext == null) {
+    public static <T> T popBean(Class<T> clazz){
+        if(applicationContext == null){
             return null;
         }
         return applicationContext.getBean(clazz);

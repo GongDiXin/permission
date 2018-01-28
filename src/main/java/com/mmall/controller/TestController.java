@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,7 +46,14 @@ public class TestController {
         SysAclModuleMapper moduleMapper = ApplicationContextHelper.popBean(SysAclModuleMapper.class);
         SysAclModule sysAclModule = moduleMapper.selectByPrimaryKey(1);
         logger.info(JsonMapper.obj2String(sysAclModule));
-        BeanValidator.validate(vo);
+        List<TestVo> list = new ArrayList<>();
+        TestVo vo1 = new TestVo();
+        vo1.setId("1");
+        TestVo vo2 = new TestVo();
+        vo2.setId("2");
+        list.add(vo1);
+        list.add(vo1);
+        BeanValidator.validate(vo,list);
         return JsonData.success("test validate");
     }
 }
