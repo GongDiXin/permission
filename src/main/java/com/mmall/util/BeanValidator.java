@@ -21,9 +21,7 @@ import java.util.*;
 public class BeanValidator {
 
     private static ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-
-    private static final String PLACE_HOLDER = "  ";
-
+    
     /**
      * @author GongDiXin
      * @date 2018/1/14 21:19
@@ -34,6 +32,7 @@ public class BeanValidator {
      * @description 对单个对象进行校验 <T>必须加，作用是指定后面的T，作为泛型
     */
     public static <T> Map<String,String> validateObject(T t,Class... groups){
+        //自动补全方法返回值 alt+shift+L
         Validator validator = validatorFactory.getValidator();
         Set validateResult = validator.validate(t,groups);
         if(validateResult.isEmpty()){
