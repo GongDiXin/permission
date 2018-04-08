@@ -53,7 +53,7 @@ public class TestController {
         vo2.setId("2");
         list.add(vo1);
         list.add(vo1);
-        BeanValidator.validate(vo,list);
-        return JsonData.success("test validate");
+        BeanValidator.beanCheck(vo);
+        return JsonData.success("validate success");
     }
 }

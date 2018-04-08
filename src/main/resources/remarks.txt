@@ -1,0 +1,3 @@
+项目备注：
+1.整合配置文件 即Spring和SpringMVC的配置文件整合到一起
+2.注意Spring和Mybatis的版本要对应
