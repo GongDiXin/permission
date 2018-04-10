@@ -2,10 +2,14 @@ package com.mmall.service;
 
 import com.mmall.common.exception.ParamException;
 import com.mmall.dao.SysDeptMapper;
+import com.mmall.model.SysDept;
 import com.mmall.param.DeptParam;
 import com.mmall.util.BeanValidator;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.mmall.util.LevelUtil;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * @author GongDiXin
@@ -15,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysDeptService {
 
-    @Autowired
+    @Resource
     private SysDeptMapper sysDeptMapper;
 
     /**
@@ -30,7 +34,18 @@ public class SysDeptService {
         if (checkExist(deptParam.getParentId(), deptParam.getName(), deptParam.getId())) {
             throw new ParamException("同一层级下存在相同名称的部门");
         }
+        SysDept dept = new SysDept();
+        dept.setParentId(deptParam.getParentId());
+        dept.setName(deptParam.getName());
+        dept.setRemark(deptParam.getRemark());
+        dept.setSeq(deptParam.getSeq());
+        dept.setLevel(LevelUtil.calculateLevel(getLevel(deptParam.getParentId()), deptParam.getParentId()));
+        //TODO:
+        dept.setOperator("System");
+        dept.setOperateIp("127.0.0.1");
 
+        dept.setOperateTime(new Date());
+        sysDeptMapper.insertSelective(dept);
     }
 
     /**
@@ -46,5 +61,21 @@ public class SysDeptService {
     public boolean checkExist(Integer paramId, String deptName, Integer deptId) {
         // TODO:
         return true;
+    }
+
+    /**
+     * 获取层级
+     *
+     * @author GongDiXin
+     * @date 2018/4/10 22:35
+     * @param deptId
+     * @return SysDept
+    */
+    private String getLevel(int deptId) {
+        SysDept dept = sysDeptMapper.selectByPrimaryKey(deptId);
+        if (dept == null) {
+            return null;
+        }
+        return dept.getLevel();
     }
 }
