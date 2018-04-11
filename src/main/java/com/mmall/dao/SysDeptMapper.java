@@ -2,6 +2,8 @@ package com.mmall.dao;
 
 import com.mmall.model.SysDept;
 
+import java.util.List;
+
 /**
  * @author GongDiXin
  * @date 2018/4/8 23:42
@@ -30,5 +32,14 @@ public interface SysDeptMapper {
      * @return
     */
     int insertSelective(SysDept dept);
+
+    /**
+     * 获取所有部门
+     *
+     * @author GongDiXin
+     * @date 2018/4/11 23:09
+     * @return List<SysDept>
+    */
+    List<SysDept> getAllDept();
 
 }

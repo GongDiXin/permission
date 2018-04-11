@@ -140,9 +140,10 @@
   </update>
 
   <select id="getAllDept" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from sys_dept
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    sys_dept
   </select>
 
   <select id="getChildDeptListByLevel" resultMap="BaseResultMap">
