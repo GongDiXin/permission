@@ -13,7 +13,7 @@ public class LevelUtil {
 
     public static final String SEPARATOR = ".";
 
-    private static final String ROOT = "0";
+    public static final String ROOT = "0";
 
     /**
      * 层级计算
@@ -25,10 +25,10 @@ public class LevelUtil {
      * @return
     */
     public static String calculateLevel(String parentLevel, int parentId) {
+
         if (StringUtils.isBlank(parentLevel)) {
             return ROOT;
-        } else {
-            return StringUtils.join(parentLevel, SEPARATOR, parentId);
         }
+        return StringUtils.join(parentLevel, SEPARATOR, parentId);
     }
 }
