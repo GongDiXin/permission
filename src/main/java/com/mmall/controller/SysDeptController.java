@@ -35,6 +35,14 @@ public class SysDeptController {
         return JsonData.success();
     }
 
+    @RequestMapping("update.json")
+    @ResponseBody
+    public JsonData update() {
+        DeptParam dept = new DeptParam();
+        deptService.update(dept);
+        return JsonData.success();
+    }
+
     @RequestMapping("tree.json")
     @ResponseBody
     public JsonData tree() {

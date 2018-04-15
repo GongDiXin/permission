@@ -12,6 +12,8 @@ import javax.validation.ValidatorFactory;
 import java.util.*;
 
 /**
+ * 参数校验类
+ *
  * @author GongDiXin
  * @version 1.0
  * @created 2018/1/14 17:43

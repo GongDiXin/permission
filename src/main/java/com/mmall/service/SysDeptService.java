@@ -6,6 +6,7 @@ import com.mmall.model.SysDept;
 import com.mmall.param.DeptParam;
 import com.mmall.util.BeanValidator;
 import com.mmall.util.LevelUtil;
+import com.mmall.util.ValidatorUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -47,6 +48,26 @@ public class SysDeptService {
         dept.setOperateTime(new Date());
         sysDeptMapper.insertSelective(dept);
     }
+
+    /**
+     * 更新部门
+     *
+     * @author GongDiXin
+     * @date 2018/4/8 23:47
+     * @param deptParam
+     */
+    public void update(DeptParam deptParam) {
+        BeanValidator.beanCheck(deptParam);
+        if (checkExist(deptParam.getParentId(), deptParam.getName(), deptParam.getId())) {
+            throw new ParamException("同一层级下存在相同名称的部门");
+        }
+        SysDept oldDept = sysDeptMapper.selectByPrimaryKey(deptParam.getId());
+        if (ValidatorUtil.isEmpty(oldDept)) {
+            throw  new ParamException("待更新部门不存在");
+        }
+
+    }
+
 
     /**
      * 判断同一层级下是否存在相同名称的部门
