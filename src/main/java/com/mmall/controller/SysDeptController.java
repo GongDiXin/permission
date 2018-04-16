@@ -29,16 +29,14 @@ public class SysDeptController {
 
     @RequestMapping("save.json")
     @ResponseBody
-    public JsonData save() {
-        DeptParam dept = new DeptParam();
+    public JsonData save(DeptParam dept) {
         deptService.save(dept);
         return JsonData.success();
     }
 
     @RequestMapping("update.json")
     @ResponseBody
-    public JsonData update() {
-        DeptParam dept = new DeptParam();
+    public JsonData update(DeptParam dept) {
         deptService.update(dept);
         return JsonData.success();
     }

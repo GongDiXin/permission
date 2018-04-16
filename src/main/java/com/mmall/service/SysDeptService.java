@@ -7,10 +7,13 @@ import com.mmall.param.DeptParam;
 import com.mmall.util.BeanValidator;
 import com.mmall.util.LevelUtil;
 import com.mmall.util.ValidatorUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author GongDiXin
@@ -66,6 +69,45 @@ public class SysDeptService {
             throw  new ParamException("待更新部门不存在");
         }
 
+        SysDept after = new SysDept();
+        after.setId(deptParam.getId());
+        after.setParentId(deptParam.getParentId());
+        after.setName(deptParam.getName());
+        after.setRemark(deptParam.getRemark());
+        after.setSeq(deptParam.getSeq());
+        //TODO:
+        after.setOperator("System-update");
+        after.setOperateIp("127.0.0.1");
+        after.setOperateTime(new Date());
+        after.setLevel(LevelUtil.calculateLevel(getLevel(deptParam.getParentId()),deptParam.getParentId()));
+        updateWithChild(oldDept, after);
+    }
+
+    /**
+     * @author GongDiXin
+     * @date 2018/4/16 23:12
+     * @param
+     * @return
+     * @exception
+    */
+    @Transactional
+    private void updateWithChild(SysDept before, SysDept after) {
+        String newLevelPrefix = after.getLevel();
+        String oldLevelPrefix = before.getLevel();
+        if (!newLevelPrefix.equals(oldLevelPrefix)) {
+            List<SysDept> deptList = sysDeptMapper.getChildDeptListByLevel(oldLevelPrefix);
+            if (CollectionUtils.isNotEmpty(deptList)) {
+                for (SysDept dept : deptList) {
+                    String level = dept.getLevel();
+                    if (level.indexOf(oldLevelPrefix) == 0) {
+                        level = newLevelPrefix + level.substring(oldLevelPrefix.length());
+                        dept.setLevel(level);
+                    }
+                }
+                sysDeptMapper.batchUpdateLevel(deptList);
+            }
+        }
+        sysDeptMapper.updateByPrimaryKey(after);
     }
 
 
@@ -74,14 +116,13 @@ public class SysDeptService {
      *
      * @author GongDiXin
      * @date 2018/4/8 23:54
-     * @param paramId
+     * @param parentId
      * @param deptName
      * @param deptId
      * @return boolean
     */
-    public boolean checkExist(Integer paramId, String deptName, Integer deptId) {
-        // TODO:
-        return true;
+    public boolean checkExist(Integer parentId, String deptName, Integer deptId) {
+        return sysDeptMapper.countByNameAndParentId(parentId, deptName, deptId) > 0;
     }
 
     /**
