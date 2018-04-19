@@ -8,6 +8,7 @@ import com.mmall.service.SysTreeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -27,21 +28,26 @@ public class SysDeptController {
     @Resource
     private SysTreeService treeService;
 
-    @RequestMapping("save.json")
+    @RequestMapping("/page.json")
+    public ModelAndView page() {
+        return new ModelAndView("dept");
+    }
+
+    @RequestMapping("/save.json")
     @ResponseBody
     public JsonData save(DeptParam dept) {
         deptService.save(dept);
         return JsonData.success();
     }
 
-    @RequestMapping("update.json")
+    @RequestMapping("/update.json")
     @ResponseBody
     public JsonData update(DeptParam dept) {
         deptService.update(dept);
         return JsonData.success();
     }
 
-    @RequestMapping("tree.json")
+    @RequestMapping("/tree.json")
     @ResponseBody
     public JsonData tree() {
         List<DeptLevelDTO> dtoList = treeService.deptTree();
