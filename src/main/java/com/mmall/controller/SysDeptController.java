@@ -28,7 +28,7 @@ public class SysDeptController {
     @Resource
     private SysTreeService treeService;
 
-    @RequestMapping("/page.json")
+    @RequestMapping("/dept.page")
     public ModelAndView page() {
         return new ModelAndView("dept");
     }

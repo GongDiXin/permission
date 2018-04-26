@@ -35,8 +35,11 @@
 <!--[if lte IE 8]>
 <script src="${contextPath}/js/html5shiv.min.js"></script>
 <script src="${contextPath}/js/respond.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="${contextPath}/js/ie10-viewport-bug-workaround.js"></script>
 <![endif]-->
-
+<script src="${contextPath}/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script src="${contextPath}/js/ie-emulation-modes-warning.js"></script>
 <script src="${contextPath}/js/jquery-1.9.1.min.js"></script>
 <script src="${contextPath}/assets/js/jquery-ui.min.js"></script>
 <script src="${contextPath}/assets/js/jquery.gritter.min.js"></script>
