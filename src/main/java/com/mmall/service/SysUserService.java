@@ -6,7 +6,6 @@ import com.mmall.model.SysUser;
 import com.mmall.param.UserParam;
 import com.mmall.util.BeanValidator;
 import com.mmall.util.MD5Util;
-import com.mmall.util.PasswordUtil;
 import com.mmall.util.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,11 +33,11 @@ public class SysUserService {
     */
     public void save(UserParam userParam) {
         BeanValidator.beanCheck(userParam);
-        if (!checkEmailExist(userParam.getId(), userParam.getMail())) {
+        if (checkMailExist(userParam.getId(), userParam.getMail())) {
             throw new ParamException("邮箱已被占用");
         }
 
-        if (!checkTelExist(userParam.getId(), userParam.getTelephone())) {
+        if (checkTelExist(userParam.getId(), userParam.getTelephone())) {
             throw new ParamException("电话已被占用");
         }
 
@@ -72,14 +71,6 @@ public class SysUserService {
     */
     public void updateUser(UserParam userParam) {
         BeanValidator.beanCheck(userParam);
-        if (!checkEmailExist(userParam.getId(), userParam.getMail())) {
-            throw new ParamException("邮箱已被占用");
-        }
-
-        if (!checkTelExist(userParam.getId(), userParam.getTelephone())) {
-            throw new ParamException("电话已被占用");
-        }
-
         SysUser beforeUser = sysUserMapper.selectByPrimaryKey(userParam.getId());
         if (ValidatorUtil.isEmpty(beforeUser)) {
             throw new ParamException("用户不存在");
@@ -106,11 +97,11 @@ public class SysUserService {
      * @author GongDiXin
      * @date 2018/4/26 23:54
      * @param userId
-     * @param email
+     * @param mail
      * @return boolean
      */
-    public boolean checkEmailExist(Integer userId, String email) {
-        return true;
+    public boolean checkMailExist(Integer userId, String mail) {
+        return sysUserMapper.countByMail(mail, userId) > 0;
     }
 
     /**
@@ -123,7 +114,7 @@ public class SysUserService {
      * @return boolean
      */
     public boolean checkTelExist(Integer userId, String telephone) {
-        return true;
+        return sysUserMapper.countByTelephone(telephone, userId) > 0;
     }
 
     /**
@@ -132,10 +123,10 @@ public class SysUserService {
      * @author GongDiXin
      * @date 2018/4/26 23:31
      * @param keyword
-     *          关键字：用户名、密码、邮箱、电话
+     *          关键字：部门id、邮箱、电话
      * @return SysUser
     */
     public SysUser findByKeyword(String keyword) {
-        return null;
+        return sysUserMapper.findByKeyword(keyword);
     }
 }

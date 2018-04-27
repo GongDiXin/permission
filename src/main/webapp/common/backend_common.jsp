@@ -1,6 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" scope="request" />
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <meta http-equiv="pragma" content="no-cache"/>
@@ -8,44 +6,41 @@
 <title>管理员控制台</title>
 <meta name="description" content="overview &amp; stats"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-<link rel="shortcut icon" href="${contextPath}/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <!-- bootstrap & fontawesome -->
-<link rel="stylesheet" href="${contextPath}/assets/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"/>
 <!-- page specific plugin styles -->
 <!-- text fonts -->
-<link rel="stylesheet" href="${contextPath}/assets/css/google-fonts.css"/>
+<link rel="stylesheet" href="/assets/css/google-fonts.css"/>
 <!-- ace styles -->
-<link rel="stylesheet" href="${contextPath}/assets/css/ace.min.css"/>
+<link rel="stylesheet" href="/assets/css/ace.min.css"/>
 <!--[if lte IE 9]>
-<link rel="stylesheet" href="${contextPath}/assets/css/ace-part2.min.css"/>
+<link rel="stylesheet" href="/assets/css/ace-part2.min.css"/>
 <![endif]-->
-<link rel="stylesheet" href="${contextPath}/assets/css/ace-skins.min.css"/>
-<link rel="stylesheet" href="${contextPath}/assets/css/ace-rtl.min.css"/>
-<link rel="stylesheet" href="${contextPath}/assets/css/jquery.gritter.css" />
-<link rel="stylesheet" href="${contextPath}/assets/css/jquery-ui.min.css" />
-<link rel="stylesheet" href="${contextPath}/assets/css/chosen.css" />
+<link rel="stylesheet" href="/assets/css/ace-skins.min.css"/>
+<link rel="stylesheet" href="/assets/css/ace-rtl.min.css"/>
+<link rel="stylesheet" href="/assets/css/jquery.gritter.css" />
+<link rel="stylesheet" href="/assets/css/jquery-ui.min.css" />
+<link rel="stylesheet" href="/assets/css/chosen.css" />
 <!--[if lte IE 9]>
-<link rel="stylesheet" href="${contextPath}/assets/css/ace-ie.min.css"/>
+<link rel="stylesheet" href="/assets/css/ace-ie.min.css"/>
 <![endif]-->
 <!-- inline styles related to this page -->
 <!-- ace settings handler -->
-<script src="${contextPath}/assets/js/ace-extra.min.js"></script>
+<script src="/assets/js/ace-extra.min.js"></script>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lte IE 8]>
-<script src="${contextPath}/js/html5shiv.min.js"></script>
-<script src="${contextPath}/js/respond.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="${contextPath}/js/ie10-viewport-bug-workaround.js"></script>
+<script src="/js/html5shiv.min.js"></script>
+<script src="/js/respond.min.js"></script>
 <![endif]-->
-<script src="${contextPath}/js/ie8-responsive-file-warning.js"></script><![endif]-->
-<script src="${contextPath}/js/ie-emulation-modes-warning.js"></script>
-<script src="${contextPath}/js/jquery-1.9.1.min.js"></script>
-<script src="${contextPath}/assets/js/jquery-ui.min.js"></script>
-<script src="${contextPath}/assets/js/jquery.gritter.min.js"></script>
-<script src="${contextPath}/assets/js/chosen.jquery.min.js"></script>
+
+<script src="/js/jquery-1.9.1.min.js"></script>
+<script src="/assets/js/jquery-ui.min.js"></script>
+<script src="/assets/js/jquery.gritter.min.js"></script>
+<script src="/assets/js/chosen.jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/mustache.js/2.2.1/mustache.js"></script>
-<script src="${contextPath}/bootstrap3.3.5/js/bootstrap.min.js"></script>
+<script src="/bootstrap3.3.5/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
     // 展示提示信息

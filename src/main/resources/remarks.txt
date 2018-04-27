@@ -1,3 +1,14 @@
 项目备注：
 1.整合配置文件 即Spring和SpringMVC的配置文件整合到一起
 2.注意Spring和Mybatis的版本要对应
+3.如果我们在controller加了访问前缀的话，当我们校验不通过跳转到signin.jsp的话spring会加上@RequestMapping("/user")即/user/signin.jsp
+  所以我们要去掉@RequestMapping("/user")
+4.当mapper.xml的返回类型是基本类型的时候我们的返回类型应该是resultType而不是resultMap
+5.xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"中如果web-app_2_5.xsd版本过低话会导致我们解析jsp的EL表达式出现问题
+6.异常Cannot forward after response has been committed
+  原因：response多次提交或者是由于有页面显示后仍然含请求转向产生的，就是说程序在return之前就已经执行了跳转或者执行过response,
+  之后遇到return的话，程序想再次执行跳转，也就是重定向
+  解决办法: 在转发或者重定向之后执行return
+7.jsp不刷新的话就先点一下任务栏的build project按钮再刷新
+8.如果你在tomcat的配置中加上了项目的路径比如http://localhost:8080/permission/admin/index.page 这里面的permission的话那么
+  你需要在jsp或者java代码中手动的拼接上根目录，办法见代码

@@ -22,7 +22,6 @@ import java.io.IOException;
  * @created 2018/4/26 23:26
  */
 @Controller
-@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -34,7 +33,7 @@ public class UserController {
         String password = request.getParameter("password");
         SysUser sysUser = sysUserService.findByKeyword(username);
         String errorMessage = "";
-        String ret = request.getRequestURI();
+        String ret = request.getParameter("ret");
         if (StringUtils.isBlank(username)) {
             errorMessage = "用户名不能为空";
         } else if (StringUtils.isBlank(password)) {
@@ -50,9 +49,11 @@ public class UserController {
             if (StringUtils.isNotBlank(ret)) {
                 // 跳转到上一次页面
                 response.sendRedirect(ret);
+                return;
             } else {
                 // 跳转到主页
                 response.sendRedirect("/admin/index.page");
+                return;
             }
         }
 
@@ -61,8 +62,17 @@ public class UserController {
         if (StringUtils.isNotBlank(ret)) {
             request.setAttribute("ret", ret);
         }
+        // 注意：如果我们在controller加了访问前缀的话，当我们校验不通过跳转的到signin.jsp的话spring会加上@RequestMapping("/user")即/user/signin.jsp
+        // 所以我们要去掉@RequestMapping("/user")
         String path = "signin.jsp";
         // 转发到登录界面 登陆后再跳转到上一次所在页面
         request.getRequestDispatcher(path).forward(request,response);
+        return;
+    }
+
+    @RequestMapping("/logout.page")
+    public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        request.getSession().invalidate();
+        request.getRequestDispatcher("signin.jsp").forward(request,response);
     }
 }
