@@ -1,11 +1,26 @@
 package com.mmall.dao;
 
+import com.mmall.beans.Page;
 import com.mmall.model.SysUser;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+/**
+ * @author GongDiXin
+ * @version 1.0
+ * @created 2018/4/26 22:42
+ */
 public interface SysUserMapper {
+
+    /**
+     * 删除用户
+     *
+     * @author GongDiXin
+     * @date 2018/5/1 22:38
+     * @param id
+     * @return int
+    */
     int deleteByPrimaryKey(Integer id);
 
     /**
@@ -73,10 +88,6 @@ public interface SysUserMapper {
     */
     SysUser findByKeyword(@Param("keyword") String keyword);
 
-
-
-    List<SysUser> getByIdList(@Param("idList") List<Integer> idList);
-
     /**
      * 获取所有用户
      *
@@ -109,7 +120,7 @@ public interface SysUserMapper {
     int countByTelephone(@Param("telephone") String telephone, @Param("id") Integer id);
 
     /**
-     * 校验用户所在部门唯一性
+     * 查询部门用户总数
      *
      * @author GongDiXin
      * @date 2018/4/27 22:16
@@ -117,4 +128,15 @@ public interface SysUserMapper {
      * @return int
     */
     int countByDeptId(@Param("deptId") int deptId);
+
+    /**
+     * 分页查询部门用户
+     *
+     * @author GongDiXin
+     * @date 2018/5/1 22:41
+     * @param deptId
+     * @param page
+     * @return List<SysUser>
+    */
+    List<SysUser> getPageByDeptId(@Param("deptId") int deptId, @Param("page") Page page);
 }

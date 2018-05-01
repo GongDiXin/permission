@@ -1,5 +1,6 @@
 package com.mmall.common.interceptor;
 
+import com.mmall.common.requestholder.RequestHolder;
 import com.mmall.util.JsonMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,5 +53,16 @@ public class HttpInterceptor extends HandlerInterceptorAdapter{
         long start = (Long)request.getAttribute(START_TIME);
         long end = System.currentTimeMillis();
         logger.info("request completed. url:{}, cost:{}", url, end - start);
+        removeThreadLocal();
+    }
+
+    /**
+     * 移除本地变量
+     *
+     * @author GongDiXin
+     * @date 2018/5/1 23:18
+    */
+    private void removeThreadLocal() {
+        RequestHolder.remove();
     }
 }

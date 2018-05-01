@@ -1,4 +1,4 @@
-package com.mmall.common;
+package com.mmall.common.constant;
 
 /**
  * @author GongDiXin
