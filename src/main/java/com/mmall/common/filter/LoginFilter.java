@@ -38,7 +38,6 @@ public class LoginFilter implements Filter {
         RequestHolder.add(user);
         RequestHolder.add(req);
         filter.doFilter(request, response);
-        logger.info("用户: "+ user.getUsername() +"登录成功");
         return;
     }
 

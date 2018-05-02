@@ -1,16 +1,15 @@
 package com.mmall.service;
 
+import com.mmall.beans.Mail;
 import com.mmall.beans.Page;
 import com.mmall.beans.PageResult;
+import com.mmall.common.constant.Constant;
 import com.mmall.common.exception.ParamException;
 import com.mmall.common.requestholder.RequestHolder;
 import com.mmall.dao.SysUserMapper;
 import com.mmall.model.SysUser;
 import com.mmall.param.UserParam;
-import com.mmall.util.BeanValidator;
-import com.mmall.util.IpUtil;
-import com.mmall.util.MD5Util;
-import com.mmall.util.ValidatorUtil;
+import com.mmall.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,8 +37,7 @@ public class SysUserService {
     */
     public void save(UserParam userParam) {
         userValidate(userParam);
-        // TODO password = PasswordUtil.randomPassword() 还没发邮件 暂时写一个
-        String password = "123456";
+        String password = PasswordUtil.randomPassword();
         String encryptPassword = MD5Util.encrypt(password);
         // 构建User
         SysUser sysUser = new SysUser();
@@ -54,7 +52,9 @@ public class SysUserService {
         sysUser.setOperator(RequestHolder.getCurrentUser().getUsername());
         sysUser.setOperateTime(new Date());
 
-        // TODO: sendEmail 发送邮件确认密码
+        //发送邮件
+        Mail mail = new Mail(Constant.MAIL_SUBJECT, Constant.MAIL_MESSAGE + password + Constant.MAIL_TIP, userParam.getMail());
+        MailUtil.send(mail);
         sysUserMapper.insert(sysUser);
     }
 

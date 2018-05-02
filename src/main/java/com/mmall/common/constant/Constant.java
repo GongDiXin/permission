@@ -26,4 +26,23 @@ public class Constant {
      * 用户状态 2-删除
      * */
     public static final Integer STATUS_3 = 2;
+
+    /**
+     * 邮件相关
+     * */
+
+    /**
+     * 邮件主题
+     * */
+    public static final String MAIL_SUBJECT = "系统登录密码";
+
+    /**
+     * 邮件消息
+     * */
+    public static final String MAIL_MESSAGE = "登录初始密码为：";
+
+    /**
+     * 邮件提示
+     * */
+    public static final String MAIL_TIP = " 请及时登录系统修改初始密码";
 }

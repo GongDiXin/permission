@@ -13,7 +13,7 @@ public class Mail {
 
     private String message;
 
-    private Set<String> receivers;
+    private String receiver;
 
     public String getSubject() {
         return subject;
@@ -31,21 +31,21 @@ public class Mail {
         this.message = message;
     }
 
-    public Set<String> getReceivers() {
-        return receivers;
+    public String getReceiver() {
+        return receiver;
     }
 
-    public void setReceivers(Set<String> receivers) {
-        this.receivers = receivers;
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
     }
 
     public Mail() {
 
     }
 
-    public Mail(String subject, String message, Set<String> receivers) {
+    public Mail(String subject, String message, String receiver) {
         this.subject = subject;
         this.message = message;
-        this.receivers = receivers;
+        this.receiver = receiver;
     }
 }
